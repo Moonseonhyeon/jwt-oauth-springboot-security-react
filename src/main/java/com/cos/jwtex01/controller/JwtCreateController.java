@@ -44,7 +44,8 @@ public class JwtCreateController {
 					.providerId(googleUser.getProviderId())
 					.role("ROLE_USER")
 					.build();
-			userEntity = userRepository.save(userRequest);
+			 userRepository.save(userRequest);
+			 userEntity = userRepository.findByUsername(googleUser.getProvider()+"_"+googleUser.getProviderId());
 		}
 				
 		String jwtToken = JWT.create()

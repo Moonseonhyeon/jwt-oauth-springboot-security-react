@@ -13,7 +13,7 @@ INSERT INTO user(username, password, email, name, gender, phone, address, detail
       SELECT id, username, email, name, gender, phone, address, detail_address, birthday, total_amount, role, cancel, profile, createDate FROM user WHERE username = #{username} AND password = #{password}
    </select>
  
- <select id="findByUsername" resultType="com.cos.jwtex01.model.User">
+ <select id="findByUsername" resultType="com.cos.jwtex01..model.User">
       SELECT id, username, email, name, gender, phone, address, detail_address, birthday, total_amount, role, cancel, profile, createDate 
       FROM user 
       WHERE username = #{username}
