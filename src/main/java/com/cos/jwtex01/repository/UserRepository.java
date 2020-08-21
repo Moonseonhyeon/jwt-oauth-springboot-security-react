@@ -6,6 +6,7 @@ public interface UserRepository {
 	public void save(User user);
 	public User login(User user);
 	public User findByUsername(String username);
+	public User googleSave(String username);
 	
 
 }

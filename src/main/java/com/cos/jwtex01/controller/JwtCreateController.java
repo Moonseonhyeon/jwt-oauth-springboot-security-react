@@ -32,7 +32,7 @@ public class JwtCreateController {
 	@PostMapping("/oauth/jwt/google") //구글 페이스북 다 따로 할거면 따로 만들고 공통으로 할거면 공통으로
 	public String createJwt(@RequestBody Map<String, Object> data) { //json문자열 그대로 받을 예정
 		System.out.println("jwtCreate 실행됨");
-		System.out.println(data.get("profileObj"));
+		System.out.println("profileObj : "+data.get("profileObj"));
 		OAuth2UserInfo googleUser = new GoogleUser((Map<String, Object>)data.get("profileObj"));
 		System.out.println(googleUser.getName());
 		

@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.cos.jwtex01.config.jwt.JwtAuthenticationFilter;
 import com.cos.jwtex01.config.jwt.JwtAuthorizationFilter;
 import com.cos.jwtex01.repository.UserRepository;
+import com.cos.jwtex01.service.UserService;
 
 @Configuration
 @EnableWebSecurity // 시큐리티 활성화 -> 기본 스프링 필터체인에 등록
@@ -22,6 +23,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private UserService userService;
 	
 	@Autowired
 	private CorsConfig corsConfig;
@@ -42,10 +46,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.httpBasic().disable()
 				
 				.addFilter(new JwtAuthenticationFilter(authenticationManager()))
-				.addFilter(new JwtAuthorizationFilter(authenticationManager(), userRepository))
+				.addFilter(new JwtAuthorizationFilter(authenticationManager(), userRepository, userService))
 				.authorizeRequests()
-				.antMatchers("/user/**")
-				.access("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
+				//.antMatchers("/user/**")
+				//.access("hasRole('ROLE_USER') or hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
 				.antMatchers("/manager/**")
 					.access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")
 				.antMatchers("/admin/**")

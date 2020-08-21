@@ -26,8 +26,9 @@ public class UserService {
 			return userRepository.login(user);	
 	}
 	
-	@Transactional
+	@Transactional(readOnly = true) 
 	public User 유저찾기(String useranme) {
+		System.out.println("유저찾기("+useranme+")");
 			return userRepository.findByUsername(useranme);
 	}
 		

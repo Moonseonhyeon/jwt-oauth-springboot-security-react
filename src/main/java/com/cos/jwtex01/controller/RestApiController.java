@@ -2,6 +2,8 @@ package com.cos.jwtex01.controller;
 
 import java.util.List;
 
+import javax.xml.ws.ResponseWrapper;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -38,7 +40,7 @@ public class RestApiController {
 	
 	// 유저 혹은 매니저 혹은 어드민이 접근 가능
 	@GetMapping("user")
-	public String user(Authentication authentication) {
+	public @ResponseWrapper String user(Authentication authentication) {
 		PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
 		System.out.println("principal : "+principal.getUser().getId());
 		System.out.println("principal : "+principal.getUser().getUsername());
