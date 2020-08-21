@@ -6,7 +6,7 @@
 <mapper namespace="com.cos.jwtex01.repository.UserRepository">
 <insert id="save">
 INSERT INTO user(username, password, email, name, gender, phone, address, detail_address, birthday, total_amount, role, cancel, profile, createDate)
-	VALUES(#{username},#{password},#{email}, #{name}, #{gender}, #{phone}, #{address}, #{detail_address}, #{birthday}, #{total_amount}, #{role}, #{cancel}, #{profile}, now())
+VALUES(#{username},#{password},#{email}, #{name}, #{gender}, #{phone}, #{address}, #{detail_address}, #{birthday}, #{total_amount}, #{role}, #{cancel}, #{profile}, now())
 </insert>
 
 <select id="login" resultType="com.cos.jwtex01.model.User">

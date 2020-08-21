@@ -16,6 +16,7 @@ import com.cos.jwtex01.config.oauth.provider.GoogleUser;
 import com.cos.jwtex01.config.oauth.provider.OAuth2UserInfo;
 import com.cos.jwtex01.model.User;
 import com.cos.jwtex01.repository.UserRepository;
+import com.cos.jwtex01.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,6 +25,7 @@ import lombok.RequiredArgsConstructor;
 public class JwtCreateController {
 	
 	private final UserRepository userRepository;
+	private final UserService userService;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Transactional
@@ -34,7 +36,8 @@ public class JwtCreateController {
 		OAuth2UserInfo googleUser = new GoogleUser((Map<String, Object>)data.get("profileObj"));
 		System.out.println(googleUser.getName());
 		
-		User userEntity = userRepository.findByUsername(googleUser.getProvider()+"_"+googleUser.getProviderId());
+		User userEntity = userService.유저찾기(googleUser.getProvider()+"_"+googleUser.getProviderId());
+			//	userRepository.findByUsername(googleUser.getProvider()+"_"+googleUser.getProviderId());
 		if(userEntity == null) {
 			User userRequest = User.builder()
 					.username(googleUser.getProvider()+"_"+googleUser.getProviderId())
@@ -44,8 +47,9 @@ public class JwtCreateController {
 					.providerId(googleUser.getProviderId())
 					.role("ROLE_USER")
 					.build();
-			 userRepository.save(userRequest);
-			 userEntity = userRepository.findByUsername(googleUser.getProvider()+"_"+googleUser.getProviderId());
+			userEntity = userService.회원가입(userRequest);
+			 //userRepository.save(userRequest);
+			 //userEntity = userRepository.findByUsername(googleUser.getProvider()+"_"+googleUser.getProviderId());
 		}
 				
 		String jwtToken = JWT.create()

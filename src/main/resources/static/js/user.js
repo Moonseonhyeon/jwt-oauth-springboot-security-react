@@ -69,9 +69,7 @@ let index = { // 변수는 let쓰고 /index라는 obeject만들었다.
 			})
 		}
 		
-		
-		
-		
+	
 
 }
 index.init();
